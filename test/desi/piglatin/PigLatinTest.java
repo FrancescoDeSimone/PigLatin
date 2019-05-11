@@ -126,6 +126,11 @@ public class PigLatinTest {
         assertEquals("XRAYAY",pigLatin.translate());
     }
 
+    @Test
+    public void testTranslateStartWithTitleXr() throws InvalidPhraseException{
+        PigLatin pigLatin = new PigLatin("Xray");
+        assertEquals("Xrayay",pigLatin.translate());
+    }
 
     @Test
     public void testTranslateKeepFirstCharUpperCase() throws InvalidPhraseException{
@@ -152,6 +157,24 @@ public class PigLatinTest {
     }
 
     @Test
+    public void testTranslateSingleLowerLetter() throws InvalidPhraseException{
+        PigLatin pigLatin = new PigLatin("d");
+        assertEquals("day",pigLatin.translate());
+    }
+
+    @Test
+    public void testTranslateSingleUpplerVowel() throws InvalidPhraseException{
+        PigLatin pigLatin = new PigLatin("A");
+        assertEquals("AAY",pigLatin.translate());
+    }
+
+    @Test
+    public void testTranslateSingleLowerVowel() throws InvalidPhraseException{
+        PigLatin pigLatin = new PigLatin("a");
+        assertEquals("aay",pigLatin.translate());
+    }
+
+    @Test
     public void testTranslateUpperCaseNoVolwes() throws InvalidPhraseException{
         PigLatin pigLatin = new PigLatin("BANANA");
         assertEquals("ANANABAY",pigLatin.translate());
@@ -163,23 +186,38 @@ public class PigLatinTest {
     }
 
     @Test(expected = InvalidPhraseException.class)
-    public void testPhraseInvalidContainANumber() throws InvalidPhraseException{
+    public void testPhraseInvalidContainMoreNumber() throws InvalidPhraseException{
+        new PigLatin("1 yell0w b1rd");
+    }
+
+    @Test(expected = InvalidPhraseException.class)
+    public void testWordInvalidContainANumber() throws InvalidPhraseException{
         new PigLatin("b1rd");
     }
 
     @Test(expected = InvalidPhraseException.class)
-    public void testPhraseInvalidUpperCase() throws InvalidPhraseException{
+    public void testWordInvalidUpperCase() throws InvalidPhraseException{
         new PigLatin("biRd");
     }
 
     @Test(expected = InvalidPhraseException.class)
-    public void testPhraseInvalidUpperCase2() throws InvalidPhraseException{
+    public void testWordInvalidUpperCase2() throws InvalidPhraseException{
+        new PigLatin("bIRD");
+    }
+
+    @Test(expected = InvalidPhraseException.class)
+    public void testWordInvalidUpperCase3() throws InvalidPhraseException{
         new PigLatin("a yelloW bird");
     }
 
     @Test(expected = InvalidPhraseException.class)
-    public void testPhraseInvalidUpperCase3() throws InvalidPhraseException{
+    public void testWordInvalidUpperCase4() throws InvalidPhraseException{
         new PigLatin("BiRd");
+    }
+
+    @Test(expected = InvalidPhraseException.class)
+    public void tesWordInvalidUpperCase5() throws InvalidPhraseException{
+        new PigLatin("BIRd ");
     }
 
     @Test(expected=InvalidPhraseException.class)
