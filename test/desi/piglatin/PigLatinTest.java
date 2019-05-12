@@ -84,9 +84,16 @@ public class PigLatinTest {
 
     @Test
     public void testTranslatePhrase() throws InvalidPhraseException{
-        PigLatin pigLatin = new PigLatin("a yellow bird");
-        assertEquals("aay ellowyay irdbay", pigLatin.translate());
+        PigLatin pigLatin = new PigLatin("This gentleman will pay for everything");
+        assertEquals("Isthay entlemangay illway aypay orfay everythingay", pigLatin.translate());
     }
+
+    @Test
+    public void testTranslatePhraseCapitalMix() throws InvalidPhraseException{
+        PigLatin pigLatin = new PigLatin("This GENTLEMEN will PAY for everything");
+        assertEquals("Isthay ENTLEMENGAY illway AYPAY orfay everythingay", pigLatin.translate());
+    }
+
 
     @Test
     public void testTranslateStartWithCh() throws InvalidPhraseException{
@@ -137,6 +144,13 @@ public class PigLatinTest {
         PigLatin pigLatin = new PigLatin("Xray");
         assertEquals("Xrayay",pigLatin.translate());
     }
+
+    @Test
+    public void testTranslateContainXr() throws InvalidPhraseException{
+        PigLatin pigLatin = new PigLatin("A Yellow bxray");
+        assertEquals("AAY Ellowyay aybxray",pigLatin.translate());
+    }
+
 
     @Test
     public void testTranslateKeepFirstCharUpperCase() throws InvalidPhraseException{
@@ -231,34 +245,44 @@ public class PigLatinTest {
         new PigLatin("A yelloW bird");
     }
 
+    @Test(expected = InvalidPhraseException.class)
+    public void testPhraseInvalidUpperCase() throws InvalidPhraseException{
+        new PigLatin("a yELLOW bird");
+    }
+
     @Test(expected=InvalidPhraseException.class)
     public void testPhraseInvalidJustASpace() throws Exception{
         new PigLatin(" ");
     }
 
     @Test(expected=InvalidPhraseException.class)
-    public void testPhraseInvalidSimbol() throws Exception{
+    public void testPhraseInvalidSimbolForwardSlash() throws Exception{
         new PigLatin("/ bird");
     }
 
 
     @Test(expected=InvalidPhraseException.class)
-    public void testPhraseInvalidSimbol1() throws Exception{
+    public void testPhraseInvalidSimbolSignA() throws Exception{
         new PigLatin("á bird");
     }
 
     @Test(expected=InvalidPhraseException.class)
-    public void testPhraseInvalidSimbol2() throws Exception{
+    public void testPhraseInvalidSimbolSignE() throws Exception{
         new PigLatin("é bird");
     }
 
     @Test(expected=InvalidPhraseException.class)
-    public void testPhraseInvalidSimbol3() throws Exception{
+    public void testPhraseInvalidSimbolAt() throws Exception{
         new PigLatin("@ bird");
     }
 
     @Test(expected=InvalidPhraseException.class)
-    public void testPhraseInvalidSimbol4() throws Exception{
+    public void testPhraseInvalidSimbolExclamationMark() throws Exception{
         new PigLatin("a bird!");
+    }
+
+    @Test(expected=InvalidPhraseException.class)
+    public void testPhraseInvalidSimbolApostrophe() throws Exception{
+        new PigLatin("don't work");
     }
 }
