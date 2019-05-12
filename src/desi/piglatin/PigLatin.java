@@ -18,22 +18,21 @@ public class PigLatin {
     }
 
     public String translate() {
-        String toTranslate = "";
+        String translate = "";
         for(String word:phrase.split((" "))){
             if(word.matches("^[aeiou]{1}[a-z]*$|^xr[a-z]*$|^Xr[a-z]*$|^[AEIOU]{1}[a-z]+$"))
-                toTranslate += word + "ay";
+                translate += word + "ay";
             else if(word.matches("^[AEIOU]{1}[A-Z]*$|^XR[A-Z]*$"))
-                toTranslate += word + "AY";
+                translate += word + "AY";
             else if(word.matches("^[^aeiouAEIOU]+.*$")){
-                    boolean upperFirst = word.matches("^[A-Z]{1}[a-z]+$");
-                    String newWord = "";
-                    if(upperFirst) word = word.toLowerCase();
-                    newWord += word.replaceAll("^([^aeiouAEIOU]+)(.*)$","$2$1");
-                    newWord += word.matches("[A-Z]+")?"AY":"ay";
-                    toTranslate += upperFirst?newWord.substring(0, 1).toUpperCase() + newWord.substring(1):newWord;
+                    boolean titleCase = word.matches("^[A-Z]{1}[a-z]+$");
+                    String newWord = ((titleCase) ?
+                        word.toLowerCase().replaceAll("^([^aeiou]+)(.*)$","$2$1ay"):
+                        word.replaceAll("^([^aeiouAEIOU]+)(.*)$","$2$1") + (word.matches("[A-Z]+")?"AY":"ay"));
+                translate += titleCase?newWord.substring(0, 1).toUpperCase() + newWord.substring(1):newWord;
             }
-            toTranslate += " ";
+            translate += " ";
         }
-        return toTranslate.substring(0,toTranslate.length()-1);
+        return translate.substring(0,translate.length()-1);
     }
 }

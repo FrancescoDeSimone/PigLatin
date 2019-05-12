@@ -231,6 +231,11 @@ public class PigLatinTest {
         new PigLatin("A yelloW bird");
     }
 
+    @Test(expected = InvalidPhraseException.class)
+    public void testPhraseInvalidUpperCase() throws InvalidPhraseException{
+        new PigLatin("a yELLOW bird");
+    }
+
     @Test(expected=InvalidPhraseException.class)
     public void testPhraseInvalidJustASpace() throws Exception{
         new PigLatin(" ");
