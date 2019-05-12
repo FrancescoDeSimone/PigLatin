@@ -115,6 +115,12 @@ public class PigLatinTest {
     }
 
     @Test
+    public void testTranslateStartWithSchTitleCase() throws InvalidPhraseException{
+        PigLatin pigLatin = new PigLatin("Schrodinger");
+        assertEquals("Odingerschray",pigLatin.translate());
+    }
+
+    @Test
     public void testTranslateStartWithXr() throws InvalidPhraseException{
         PigLatin pigLatin = new PigLatin("xray");
         assertEquals("xrayay",pigLatin.translate());
@@ -220,9 +226,39 @@ public class PigLatinTest {
         new PigLatin("BIRd ");
     }
 
+    @Test(expected = InvalidPhraseException.class)
+    public void testWordInvalidUpperCase6() throws InvalidPhraseException{
+        new PigLatin("A yelloW bird");
+    }
+
     @Test(expected=InvalidPhraseException.class)
     public void testPhraseInvalidJustASpace() throws Exception{
         new PigLatin(" ");
     }
 
+    @Test(expected=InvalidPhraseException.class)
+    public void testPhraseInvalidSimbol() throws Exception{
+        new PigLatin("/ bird");
+    }
+
+
+    @Test(expected=InvalidPhraseException.class)
+    public void testPhraseInvalidSimbol1() throws Exception{
+        new PigLatin("á bird");
+    }
+
+    @Test(expected=InvalidPhraseException.class)
+    public void testPhraseInvalidSimbol2() throws Exception{
+        new PigLatin("é bird");
+    }
+
+    @Test(expected=InvalidPhraseException.class)
+    public void testPhraseInvalidSimbol3() throws Exception{
+        new PigLatin("@ bird");
+    }
+
+    @Test(expected=InvalidPhraseException.class)
+    public void testPhraseInvalidSimbol4() throws Exception{
+        new PigLatin("a bird!");
+    }
 }

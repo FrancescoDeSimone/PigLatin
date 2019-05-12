@@ -20,9 +20,9 @@ public class PigLatin {
     public String translate() {
         String toTranslate = "";
         for(String word:phrase.split((" "))){
-            if(word.matches("^[aeiou]{1}[a-z]*$|^xr.*$|^Xr.*$|^[AEIOU]{1}[a-z]+$"))
+            if(word.matches("^[aeiou]{1}[a-z]*$|^xr[a-z]*$|^Xr[a-z]*$|^[AEIOU]{1}[a-z]+$"))
                 toTranslate += word + "ay";
-            else if(word.matches("^[AEIOU]{1}[A-Z]*$|^XR.*$"))
+            else if(word.matches("^[AEIOU]{1}[A-Z]*$|^XR[A-Z]*$"))
                 toTranslate += word + "AY";
             else if(word.matches("^[^aeiouAEIOU]+.*$")){
                     boolean upperFirst = word.matches("^[A-Z]{1}[a-z]+$");
