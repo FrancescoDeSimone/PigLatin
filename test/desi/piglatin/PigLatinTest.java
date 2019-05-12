@@ -93,8 +93,7 @@ public class PigLatinTest {
         PigLatin pigLatin = new PigLatin("This GENTLEMEN will PAY for everything");
         assertEquals("Isthay ENTLEMENGAY illway AYPAY orfay everythingay", pigLatin.translate());
     }
-
-
+    
     @Test
     public void testTranslateStartWithCh() throws InvalidPhraseException{
         PigLatin pigLatin = new PigLatin("chair");
